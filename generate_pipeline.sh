@@ -1,8 +1,6 @@
 #!/bin/bash
 
-get_base_filename() {
-	return $(echo $1 | rev | cut -d"/" -f1 | rev)
-}
+#requires gstreamer0.10-tools graphviz
 
 if [ $# -ne 1 ] #Expects one file - input video file 
 then
@@ -10,18 +8,20 @@ then
 	exit 65 # bad arguments
 fi
 
-get_base_filename $1
-VID_FILE_BASENAME=$?
+VID_FILE_BASENAME=$(basename $1)
+echo $VID_FILE_BASENAME
 
 OUTDIR="$(pwd)/pipeline_output"
 
 export GST_DEBUG_DUMP_DOT_DIR=$OUTDIR
 
 gst-launch-0.10 playbin2 uri=file://$1
-dot -Tpng -o"$OUTDIR/$VID_FILE_BASENAME"'.READY_PAUSED.png' $(ls "$OUTDIR/"* | grep READY_PAUSED)
 
-#for f in $(ls $OUTDIR/* | grep "gst-launch")
-#do
-#	get_base_filename $f
-#	base_f = $?
-#done
+DATESTR=$(date)
+DATESTR="${DATESTR// /_}"
+dot -Tpng -o"$OUTDIR/$VID_FILE_BASENAME"'.READY_PAUSED'".$DATESTR"'.png' $(ls "$OUTDIR/"* | grep gst-launch.READY_PAUSED)
+
+for f in $(ls $OUTDIR/* | grep "gst-launch")
+do
+	mv $f "$OUTDIR/$DATESTR.$VID_FILE_BASENAME."$(echo $(basename $f) | rev | cut -d"." -f-2 | rev)
+done
