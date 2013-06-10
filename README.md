@@ -22,6 +22,23 @@ dot generates a .png file representing the pipeline gstreamer automatically crea
 
 Finally, as a bit of cleanup, the script runs through the .dot files recently generated and helpfully renames them, based on the file used and the date the script was run.
 
+Graphviz: Genereal Usage for gstreamer
+======================================
+
+dot
+---
+
+In order to use dot to view gstreamer pipelines, first tell gstreamer to place its .dot output files in $PATH with
+
+	export GST_DEBUG_DUMP_DOT_DIR=$PATH
+
+Then, run a gstreamer pipeline using gst-launch-0.10
+This will produce several .dot files in $PATH
+Select the one you wish to view ($DOTFILE) and create an image for it with
+
+	dot -Tpng 		-o"$OUTFILE_NAME.png" 	$DOTFILE
+	#   output png		name of output file	name of input file
+
 Attribution
------------
+===========
 http://lists.freedesktop.org/archives/gstreamer-devel/2011-September/033052.html
