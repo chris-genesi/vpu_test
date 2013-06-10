@@ -22,3 +22,6 @@ dot generates a .png file representing the pipeline gstreamer automatically crea
 
 Finally, as a bit of cleanup, the script runs through the .dot files recently generated and helpfully renames them, based on the file used and the date the script was run.
 
+Attribution
+-----------
+http://lists.freedesktop.org/archives/gstreamer-devel/2011-September/033052.html
