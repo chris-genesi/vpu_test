@@ -1,0 +1,3 @@
+gst-launch-0.10 filesrc location=/home/christopher/git/vpu_test/clips/big_buck_bunny_720p_surround.clip.avi ! avidemux ! mfw_vpudecoder ! videoscale ! 'video/x-raw-yuv, width=640, height=360' ! queue ! mfw_vpuencoder ! 'video/x-h264, width=640, height=360' ! avimux ! filesink location=bbb.h264.w640h360.avi
+
+dd0454ad45657896782b126feb384817  bbb.h264.w640h360.avi
