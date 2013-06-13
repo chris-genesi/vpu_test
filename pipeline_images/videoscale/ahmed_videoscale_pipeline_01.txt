@@ -1,0 +1,40 @@
+christopher@lulu vpu_test$ gst-launch-0.10 filesrc location=/home/christopher/git/vpu_test/clips/big_buck_bunny_720p_surround.clip.avi ! avidemux ! mfw_vpudecoder ! videoscale ! 'video/x-raw-yuv, width=720, height=576' ! queue ! mfw_vpuencoder ! 'video/x-h264, width=720, height=576' ! avimux ! filesink location=test.avi
+Setting pipeline to PAUSED ...
+[INFO]	Product Info: i.MX51
+VPU Version: firmware 13.4.32; libvpu: 5.1.4 
+MFW_GST_VPU_ENCODER_PLUGIN 2.0.1-1 build on May 17 2013 01:12:15.
+[INFO]	Product Info: i.MX51
+VPU Version: firmware 13.4.32; libvpu: 5.1.4 
+MFW_GST_VPU_DECODER_PLUGIN 2.0.1-1 build on May 17 2013 01:11:29.
+Pipeline is PREROLLING ...
+[WARN]	VPU iram is less than needed, some parts don't use iram
+hwbuf allocator zone(622592) created
+[ERR]	VPU iram is less than search ram size
+[WARN]	VPU iram is less than needed, some parts don't use iram
+hwbuf allocator zone(622592) destroied.
+Pipeline is PREROLLED ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+hwbuf allocator zone(622592) created
+hwbuf allocator zone(622592) destroied.
+# ~2 minutes later of the same two lines repeated
+hwbuf allocator zone(622592) destroied.
+hwbuf allocator zone(622592) created
+^CCaught interrupt -- handling interrupt.
+Interrupt: Stopping pipeline ...
+Execution ended after 144001344875 ns.
+Setting pipeline to PAUSED ...
+Setting pipeline to READY ...
+hwbuf allocator zone(622592) destroied.
+Setting pipeline to NULL ...
+
+>>VPU_DEC: State: Ready to Null
+Freeing pipeline ...
+Caught SIGSEGV accessing address 0x2aad6038
+#0  0x2ac92fc6 in ?? ()
+#1  0x2ac91c7e in ?? ()
+Spinning.  Please run 'gdb gst-launch 2280' to continue debugging, Ctrl-C to quit, or Ctrl-\ to dump core.
+^C
+
+#File `test.avi' is not playable, although to confirm I will have to run this with -e
+#Playing the file also causes all x-terms to freeze up
